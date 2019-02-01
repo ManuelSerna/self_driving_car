@@ -1,0 +1,69 @@
+MNIST Image Recognition tutorial notes
+
+MNIST Dataset
+--------------------------------------------------------------------------
+
+There are different types of data sets for neural networks:
+    - Training sets: data used to train a neural network, this data is used to minimize error.
+    - Validation sets: data used to validate a neural network and check to see how well generalizes new data and then adjusts its hyperparameters.
+    - Test sets: tests a neural network and evaluate its performace based on images it has never seen before. Determines how well the model will do in the real world.
+
+The MNIST database (Modified National Institute of Standards and Technology database) is a large database of handwritten digits that is commonly used for training various image processing systems.
+The database is also widely used for training and testing in the field of machine learning.
+
+The numbers 0-9 are themselves the outputs, so we have 10 classes to distinguish from.
+
+Images from the MNIST database are 28x28 pixels, 28^2=784 pixels must be analyzed. This means that there must be 784 nodes in the input layer, a deep neural network will be needed.
+
+Train and Test
+--------------------------------------------------------------------------
+Suppose a neural network is given training data to reduce its error in identifying numbers. It is tested by identifying what is really the number 4, but misclassifies it as 3.
+    * In this case the model was trained to fit the training data but was not generalized to classify new data it has not seen before.
+    
+* Generalization: the ability to correctly classfiy newly inputed data which do not have labels.
+
+When training, neural networks can "remember" or "memorize" the training set very well, the model they use comforms more specifically to the that training data, this can be described as bias.
+    - We need to measure how well a network is able to pick on general patterns.
+    
+Training error < Test Error
+    - At some point, the more we minimize the training error, the gap between the test and training error grows larger.
+        - We need this gap to be small.
+        
+Steps to generalize in a nutshell (SEE IMAGE):
+    1. Small training error
+        challenge: underfitting - model is not provided with sufficient capacity for it to be able to capture the data's underlying trend. 
+    
+    2. Gap between test and training data grows larger
+        challenge: overfitting - while the model does fit the data, it does not extract the correct structure.
+        
+How do we know if a model becomes too overfit?
+    - A good indication is when training error is low but test error is much higher.
+    
+    * If a model is overfitted one can:
+        - reduce depth and complexity, otherwise the network will remember specific details.
+        - reduce of nodes
+        - less epochs
+        * using larger datasets can also help to reduce overfitting, as the network must now be flexible enough to account for more data. It won't always work, but training with more data can improve accuracy, so long as the data data is clean and relevant, and not just noisy data.
+        
+* Training algorithms like gradient descent reduce training error.
+* Regularization aims to reduce generalization error.
+
+Hyperparameters and Validation sets
+--------------------------------------------------------------------------
+- Used to distinguish from model parameters.
+- Hyperparameters are used to control the behavior of the learning algorithm.
+    - examples: learning rate, number of nodes per layers, number of hidden layers, the depth of the neural network, and so on. 
+    
+- to avoid overfitting, we can simply modify the hyperparameters.
+
+*Validation: a set of example data we use to finetune the hyperparameters of a classifier.
+    1. Use training dataset to learn standard parameters (training stage).
+    2. user validation dataset to fine tune hyperparameters.
+
+During the training stage, the goal is to minimize the training error.
+Training set, generally speaking, is 3x-4x larger than the validation set.
+    - Using the model that was trained based on the training set, it will try to classify a new subset of images the model has never seen before--the validation set.
+        - What it does is it evaluates the performance of the model for different combinations of hyperparameters. The model with the least validation error is kept. This helps avoid overfitting.
+        
+A final evaluation on how well the classifier was generalized to generalize new images it has not seen before after finishing fully training the model comes the test data.
+    - Test data has zero effect on the model, it is meant for final evaluation.

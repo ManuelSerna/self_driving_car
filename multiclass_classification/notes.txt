@@ -1,0 +1,42 @@
+Multiclass Classification notes
+
+Softmax
+-------------------------------------------------
+- With binary datasets, the sigmoid function S(x)=e^x/(1+e^x) was useful for classifying data. However, with three or more labels, it does not work, we now need the softmax function.
+
+Softmax is a useful activation function for scenarios involving multiclass functions.
+
+Equation:
+                       n 
+    P(score m) = e^m/( E e^i )
+                      i=1
+    
+    - this computes the probability of a score m when there are n number of classes present. Take the summation of all exponentials.
+    - remember that the total probability must equal 1!
+
+Labeling is also an issue.
+    - algorithm would favor labels as if some values are worth more than others.
+
+One hot encoding allows us to classify our classes without assuming any dependence between the classes.
+    - It works by creating separate columns for each data label in the data set, and using an appropriate 1 or 0 value for each column to identify a label class.
+    
+This can be done for any number of classes, with the appropriate number of columns.
+
+    Example: 3 class types represented by 3 sports balls.
+    +-------------+-------+-------+-------+
+    |  Ball Type  | Value | Value | Value |
+    +-------------+-------+-------+-------+
+    | Soccer Ball |     1 |     0 |     0 | <- label: 100
+    | Basket Ball |     0 |     1 |     0 | <- label: 010
+    | Volley Ball |     0 |     0 |     1 | <- label: 001
+    +-------------+-------+-------+-------+
+
+Cross Entropy
+-------------------------------------------------
+A method of measuring error within a neural network.
+    - lower value: more accurate system
+    - higher value: less accurate system
+    
+The process of gradient descent and back propagation are both not generally affected by shiftin the analysis from a binary data set to a multiclass dataset.
+
+(see image).

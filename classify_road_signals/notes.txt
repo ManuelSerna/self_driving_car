@@ -1,0 +1,65 @@
+Classifying Road Signs project notes
+---------------------------------------
+
+- Before we can work with a complicated data set like road signs. 
+    We need to preprocess the images before we can pass them as inputs in the cnn.
+
+    Steps to preprocess an image (example in the next following lines):
+        1) Grayscale.
+            - Reinforce that color is not a very defining feature for these signs, greyscaling them is enforcing this.
+            Also, reduce the depth from 3 to 1, fewer parameters are needed, 
+            so the neural network is much more efficient and require less computing power to classify data.
+            
+        2) Equalize grayscale intensities.
+            - This enhances the contrast such that any grayscale intensities are better distributed.
+            Done through histogram equalization.
+        
+        3) Normalize grayscale intensities.
+            - Divide all pixels in the image (which are in a matrix), which are now grayscaled, by 255.
+        
+        4) Format the image pixels to be a 1D array.
+        4) Reshape the images (array of intensities) to have the same dimensions, but with a depth of 1.
+            - This is done so that we only have a gray channel.
+        
+        5) Produce augmented images.
+            * This is the process by which we create new data for our model to use during the training process.
+                - This is done by taking our existing datasets and transforming or altering the images in useful ways to create new images.
+                - ex: rotating, zooming in, shifting, etc.
+            - The reason the data augmentation technique is useful is because it allows our model to look at each image in our dataset from a variety of different perspectives.
+            This allows it to extract relevant features more accurately and allows it to attain more feature-related data from each training image.
+        
+        6) One hot encode data labels.
+            - Distingiush between classes in a non-biased way.
+    
+- Now we can define our neural network. For classifying road signs, I used a modified leNet convolutional neural network.
+    * Modified leNet structure:
+        - convolutional layer: extract important features using a kernel and mapping these features to a feature map.
+        - convolutional layer: 2nd time.
+        - pooling layer: reduces the amount of inputs (reduces the size of the image) to better generalize features, scale down by some scalar.
+        
+        - convolutional layer: again.
+        - convolutional layer: 2nd time.
+        - pooling layer: again.
+        
+        - Flatten array of inputs in order to format properly so that it can be fed into the fully-connected layer.
+        - Fully-connected layer: update model that will classify data.
+        - Dropout layer: drop a fraction of different input nodes with each update.
+            They are used in between layers that have a high number of parameters, these are more likely to overfit.
+            This helps improve generealization, the model can combine all trained nodes to better classify data.
+            
+        - Finally, define the output layer to give probabilities of data belonging to a certain class.
+
+- Always try to modify your model to see just how modifications improve the effectiveness of your model.
+    - Several ways to fine-tune your model.
+        i) Increase the number of filters to improve model.
+            * While increasing the number of filters increases the number of parameters and thus the amount of computing power needed, it is a necessary modification for improving our network's performance.
+        
+        ii) Add more convolutional layers to improve performance; we can extract more features and can also lead to improved accuracy.
+            * By adding more convolutional layers, the dimensions of our image decrease. By the time our image of data reaches the fully connected layers, it has much smaller dims, so less parameters, less overall parameters overall.
+        
+        iii) using more than one dropout layer is common and can be a very effective technique.
+            - Further reduces overfitting.
+        
+        iv) Data augmentation.
+        
+        v) Lowering learning rate for optimizer algorithm (Keras's Adam), from 0.1

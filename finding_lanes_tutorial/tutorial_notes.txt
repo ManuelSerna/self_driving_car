@@ -1,0 +1,60 @@
+OpenCV Python Tutorial - Find Lanes for Self-Driving Cars (Computer Vision Basics Tutorial)
+
+    - My first project into computer vision.
+    - Start Date: 20 Dec 2018.
+
+    - Import OpenCV (open source computer vision library), you may have to switch to root in order to get past some permissions.
+
+To install on a Linux machine: $ pip install opencv-contrib-python
+
+* Edge Detection - identify sharp changes in intensity in adjacent pixels, this is one way to identify car lanes. The image, like the image variable above, is represented as a matrix.
+
+- Intensity can be 0 (black) to 255 (white).
+- Gradient: measure of change of brightness over adjacent pixels.
+    - Strong: example: 0 -> 255 (black -> white)
+    - Small: example: 0 -> 15 (black -> little less black)
+
+Process to identify lanes
+    1) Convert image to greyscale.
+        Color has 3 channels of intensity (R, G, B), so greyscale (1 intensity) is faster to process.
+        
+    2) Reduce noise.
+        Noise can create false edges.
+        Gaussian filter - use a kernel, pixel intensity is the average of its surrounding pixels. In our example, we use a 5x5 kernel.
+    
+    3) Canny edge detection.
+        Call canny function, computes the gradient in all directions.
+        It will trace the edge with large change in intensity (large gradient) in an outline of white pixels.
+        
+        cv2.Canny(image, low_threshold, high_threshold)
+            - look at documentation, it will determine what edges will become lines.
+        
+        So only lines are white, the rest is black (zero intensity).
+    
+    4) Identify region of interest.
+        We will take our canny image and only get the region we want to take lines from.
+            - This will usually be in the bottom center and the road headed towards the horizon will make a triangle, so that will be our general area of interest.
+        
+    5) Get lines from the region of interest using Hough space.
+        Hough transform:
+            - plot slope (m) with y-intercept (b), from y=mx+b.
+            
+        But what if you have a vertical line?
+            You get an infinite slope.
+            A more robust way to find line of best fit for points way is to use polar coordinates.
+            
+            p = xcos(t) + ysin(t)
+            (rho)   (t = angle in radians)
+        
+            Cartesian (x, y)
+            Polar (angle, rho)
+        
+        The result is a bunch of short lines, average the slopes of the left and right lanes to get a smooth lane outline.
+    
+    A short overview to get lanes thus far:
+    
+        canny (get outline of everything in picture) -> region of interest (isolate one region) -> get lines -> average the lines in image
+    
+    6) Finally, mix the original image and the final lane image.
+        Add intensities of the two pictures, since the lane image is mostly 0 values, the original image does not change.
+        Now, the lanes in a frame are highlighted.

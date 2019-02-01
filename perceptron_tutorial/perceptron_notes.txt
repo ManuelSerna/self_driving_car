@@ -1,0 +1,114 @@
+Neural Networks - The Perceptron
+
+Overview
+-------------------------------------------------
+Neural networks are inspired by biological neural networks, vaguely emulate how we humans learn.
+
+The perceptron is like a neuron of a brain, there are input nodes, and transfer the appropriate output.
+In a neuron, the dendrite receives electrical signals, the axon branches out to multiple axon terminals to send the appropriate signal. Many neurons form a biological network. 
+
+Machine Learning
+-------------------------------------------------
+- The ability to learn with data.
+
+- Supervised and unsupervised learning.
+    - Supervised more popular. Data is labeled and has meaning.
+        - Example: given handwritten numbers with correct labels, algorithm must recognize a new set of handwritten images. Rules must be created and such.
+    - Unsupervised involves large data sets with no labels, the algorithm finds patterns in the data without prior training.
+
+Linear Regression: one method of supervised learning
+-------------------------------------------------
+Two variables:
+    - Response variable: variable whose value we want to explain and predict based on the values of the independent variable (ouput).
+    - Explanatory (independent) variable: the input.
+
+Goal: Establish linear a relationship between the two.
+
+Idea: Given several data points and plotting them on a graph, we can apply a line of best fit to predict future inputs. This line of best fit is called the regression line.
+    - This is one way of supervised learning.
+    - But realistically, data does not behave like a straight line. On average data will follow a linear pattern.
+    - Thus the linear regression model also accounts for an error value, minimize error by adjusting regression line.
+    
+Classification: another method of supervised learning
+-------------------------------------------------
+- Important for self-driving cars.
+
+- Idea: approximates a mapping function which predicts a class or category for a given observation. It takes some input x and classfies it, maps it to some category.
+    - Example: take into account whether a person might be diabetic. Two factors we will look at (for the sake of the model) are age and blood sugar (mmol/L).
+        - Two labels: disease and no disease.
+        - see image for cartesian graph.
+
+This method will be used to identify cars, pedestrians, other vehicles (like bicycles), and traffic signs.
+
+A more analytical approach to the above scenario
+- There are two inputs: age (label as x1), and sugar levels (label as x2)
+    - x1 will be graphed on x-axis, and x2 on the y-axis (see images)
+
+Perceptrons
+-------------------------------------------------
+- The most basic form of a neural network.
+
+Building off of the diabetics example
+    Our predictive linear model node will receive two input nodes: age (x1) and blood sugar (x2).
+    The perceptron, given input, will plot the point on the graph, and check where the point is relative to the linear model.
+    
+    Consider adding a third input neuron which is a constant to multiply by b, the bias. 
+    
+    There is also a second node in the perceptron which we have actually used subconciously this whole time--the activation function.
+    
+    -Activation function: defines the output. 
+    
+    The first node in the perceptron takes the linear combination of all the inputs. The step function checks the result of our linear combination (see perceptron image).
+
+Error Function
+-------------------------------------------------
+- Question: How do we adjust our model to get a line with minimal error?
+
+- The algorithm has to start somewhere, so it will pick a random line with the form: w1*x1 + -w2*x2 + b
+Obviously there will be misclassified points, now through gradient descent, our network is going to take tiny steps, corresponding to the learning rate, need to be sufficiently small.
+You do not want to readjust drastically in one direction, especially with many points.
+You keep going until there is no or sufficiently little error.
+
+But first we need to adjust our view of perceptrons.
+
+Sigmoid
+-------------------------------------------------
+Need error function, let's call it E.
+	- The error function gives large penalties to misclassified points. Correctly classified points yield little penalty.
+	- Total error is the sum of the penalties of each point. Move the line in the direction of the most errors.
+
+- New perceptron structure (see picture). 
+- We cannot use a step function (which is a discrete function, where the only outcomes are 0 and 1).
+We need to use continuous function that accounts for fractions, thus making our model more accurate, thus we use the sigmoid.
+
+Cross Entropy
+-------------------------------------------------
+- What linear model (equation of a line) should be used?
+	- Determine which model gives the least error.
+
+Cross entropy involves the summation of logarithms. When points are correctly classified, they have small error penalties, whereas they are incorrectly classfied they have big error penalties.
+It follows that the linear model that better classifies the points has a small cross entropy.
+
+Formula: -(Sigma) yln(p) + (1-y)(ln(1-p))
+
+Gradient Descent
+-------------------------------------------------
+- In order to minimize the gradient you have to keep subtracting it from your linear parameters (x1, x2, and bias) (see image).
+    You keep doing this in small steps.
+    * Gradient is denoted by an upside down traingle
+    Simplified version:
+    __
+    \/E = (1/m) * pts * (p-y) * c
+    where:
+        pts = points
+        p = probability
+        y = label
+        m = number of points
+        c = constant to make sure you progress in small leaps
+
+Conclusion
+-------------------------------------------------
+We have now trained a perceptron to learn from previously labeled data to develop a linear model that fits our data with minimal error, which can now make predictions on new data.
+Now we know how the training works under the hood. What if there was an easier way to do this?
+
+Keras is a python library to train neural networks.

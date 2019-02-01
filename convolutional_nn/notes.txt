@@ -1,0 +1,80 @@
+Convolutional Neural Networks (CNN, ConvNets) notes
+
+- Go-to model for image recognition.
+    - most effective in face-recognition, object detection, powering self-driving cars.
+
+Convolutions and MNIST
+-------------------------------------------------
+CNNs are useful for analyzing and classifying images, they are very effective at recognizing useful patterns within the images by understanding that spatial structure of the inputs is relevant.
+
+Also require fewer parameters.
+
+Say we had an RGB image with dims 72x72, that's 5184 pixels. Dealing with color, there are 15,552 total nodes to deal with, artificial neural networks demand too much computations for this method to be practically used.
+
+Use pooling layers, which will act to continuously reduce the number of parameters and computations needed across layers.
+
+Layers in a CNN
+=================================================
+
+Convolutional Layer
+-------------------------------------------------
+CNNs are made up of 3 layers:
+    - Convolutional layers
+    - Pooling layers
+    - Fully-Connected layers
+    
+    The general similarities being we have an input and output layer.
+    
+We will focus on the convolutional layer
+
+* Main goal: to extract and learn specific features that can help classify an image.
+
+* Kernel convolution
+    - Suppose we have an image with gray intensities from 0 to 255. The entire image is the input.
+        - Each pixel corresponds to an input node. All of these inputs/pixels inside of the convolutional are going to be processed by a convolutional filter, also known as a kernel, or kernel matrix.
+        - These kernels are generally small in dimensionality (say, n * m).
+            - Apply n * m convolution on an image.
+        - Perform the convolutional operation by sliding the kernel at every location in the image.
+        * Stride: the amount by which the kernel shifts. Move x pixels at a time.
+        
+* The primary purpose of the convolutional layer is to extract and learn specific image features. Features that we can use to help classify an image.
+    - The kernel itself is a feature detector.
+    
+Every kernel is designed to have a distinct set of weights (more on that later).
+    - The more kernels we have, the more features we can detect.
+
+* Translational Invariance: if a kernel is able to detect a feature in one part of the image, it is likely that it can detect the same feature somewhere.
+
+- What we described here was 2D convolution. Since we have worked with greyscale.
+    - If working with RGB, it is 3D, we must then have a 3D kernel (a kernel with a depth of 3) since we have 3 channels to deal with.
+
+
+Pooling
+-------------------------------------------------
+* Acts to shrink the image stack by reducing the dimensionality of the representation of each feature map, reduing the computational complexity of the model. Although it does retain the most important information, it is done to avoid overfitting.
+
+* Pooling operation (like sum or average) is needed, for we'll use max pooling, which reports the max output within within a rectangular neighborhood. 
+    - It is like a kernel for a kernel.
+    - Reduces computational cost.
+    - Reduces the number of parameters in the image.
+    - Helps to reduce overfitting by providing an abstractive form of the original feature map. Still preserves the features, but smaller.
+    - The max value being taken into account corresponds to a region in the image most prevalent to the feature of interest.
+    
+    Provides a scale invariant representation of the image, useful as it can detect features no matter where they are located.
+    
+There are can be multiple convolutional layers and subsequent pooling layers to further scale down the input image. This can help the computer generalize different features even if it looks more and more pixely.
+- In each layer we apply a kernel whose values are trained to detect a certain feature. Everything else is filtered out, a certain kernel only cares about a specific feature.
+
+Fully Connected Layer
+-------------------------------------------------
+- The output from the convolutional and pooling operations, each feature map must be flattened into a 1D array of pixels for it to be fed to the input layer of the fully connected network, where each pixel corresponds to a node in the input layer.
+- The fully connected network is responsible in taking these features as inputs, processing them, to obtain a final probabilty as to which class the image belongns to.
+
+* This part is in charge of classification.
+    - The first part is in charge of feature extraction.
+    
+* It is just a multi-layered perceptron network.
+    - To train it, it adjusts its weights and bias values to minimize error based on a gradient algorithm (still use gradient descent).
+    - Error--cross entropy--value is calculated, so to minimize error we must update all the filter values, the weights and bias values of our network, using back propagation, based on the gradient of the error. After minimizing the error, eventually the network learns the proper filter and parameter values to correctly extract features and classify them accordingly.
+    * The values of the filter matrix in the convolutional layer and connection weights in the fully connected layer are the only things that change during training. Specify early on when coding this.
+    

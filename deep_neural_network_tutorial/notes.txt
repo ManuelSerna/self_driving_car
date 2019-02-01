@@ -1,0 +1,52 @@
+Deep Neural Network notes
+
+Non-Linear Boundaries
+-------------------------------------------------
+When linear models cannot satisfactorily satisfy data, we will need a non-linear model.
+We can obtain this curve by combining two perceptrons into a third one, to visualize this we can superimpose two linear models.
+    - Whereas both cannot correctly classify data, taking the linear combination results in a much more accurate model.
+
+* Linearly combining existing linear models to create new models that better classify our data is the core of complex neural networks.
+    - Very much like the perceptrons you have learned about before.
+    
+Architecture
+-------------------------------------------------
+(see architecture images for explanations and graphics).
+
+- There is an input layer that takes in a point (x1, x2), now apply those points and a bias to each linear model. Just follow the lines where each input node goes.
+- Then work your way through the hidden layer(s) until you finally reach the output layer.
+- The output layer will give your point (x1, x2) a probability.
+
+The more hidden layers we have, the deeper our neural network gets. Hence the term deep neural network.
+
+* All we are doing is combining models to obtain more complex non-linear models to best classify our data.
+
+Feedforward
+-------------------------------------------------
+* The process of receiving to produce some kind of output to make some kind of prediction.
+    - No feedback loops, just input, hidden, and output layers.
+
+The number of hidden layers is the depth of the neural network.
+
+Need to address errors in case we get really bad models.
+
+Error function
+-------------------------------------------------
+- First conduct a feed forward operation on previously-labeled data to obtain their prediction.
+- Then apply the error function on all the probabilities to determine the total error.
+- This error is then backpropagated in a reverse feed-forward operation to update the weights of all of our models throughout the neural network.
+- Repeat at some learning rate.
+
+Back propagation
+-------------------------------------------------
+Recall:
+    Cross entropy formula:
+    -(sigma)y*ln(p) + (1-y)(ln(1-p))
+    
+Gradient descent is given by taking the derivative of the error function with respect to all the weights of the neural network.
+    - Take partial derivatives.
+
+Bacpropagate to update the weights.
+
+-------------------------------------------------
+Deep Neural Networks, when faced with large amounts of data, use up a lot of computing resources. Convoluted neural networks are a much more effecient solution.

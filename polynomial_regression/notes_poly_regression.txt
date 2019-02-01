@@ -1,0 +1,19 @@
+Polynomial regression
+---------------------------------------
+
+- Before we looked at classification whose sole purpose was to group the output into some class.
+- Linear regression is used to predict continuous values based on a line that best models the relationship which best models the relationship between the indenpendent X and the dependent variable y.
+    - continuous spectrum.
+    - Linear regression is the simplest form of regression.
+
+- We train a linear regression model by minimizing the loss over our data which would correspond to the mean squared error.
+
+* Mean squared error: measures the average of the squares of the errors--that is, he average squared difference between the estimated values and what is estimated. A measure of the quality of an estimator, and always non-negative.
+
+    - Smaller mse == smaller error == the better the estimator.
+                  n
+    MSE = (1/n) * E(fi - yi)^2
+                 i=1
+    Where n is the number of data points,
+    fi the value returned by the model, and
+    yi the actual value for data point i.
