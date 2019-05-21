@@ -1,12 +1,13 @@
-OpenCV Python Tutorial - Find Lanes for Self-Driving Cars (Computer Vision Basics Tutorial)
+*************************************************
+OpenCV Python Tutorial:
+Find Lanes for Self-Driving Cars (Computer Vision Basics Tutorial)
+*************************************************
+- My first project into computer vision.
+- Start Date: 20 Dec 2018.
 
-    - My first project into computer vision.
-    - Start Date: 20 Dec 2018.
+- Use pip to install OpenCV.
 
-    - Import OpenCV (open source computer vision library), you may have to switch to root in order to get past some permissions.
-
-To install on a Linux machine: $ pip install opencv-contrib-python
-
+-------------------------------------------------
 * Edge Detection - identify sharp changes in intensity in adjacent pixels, this is one way to identify car lanes. The image, like the image variable above, is represented as a matrix.
 
 - Intensity can be 0 (black) to 255 (white).
@@ -43,11 +44,10 @@ Process to identify lanes
             You get an infinite slope.
             A more robust way to find line of best fit for points way is to use polar coordinates.
             
-            p = xcos(t) + ysin(t)
-            (rho)   (t = angle in radians)
+            Rho = xcos(t) + ysin(t) where t = angle in radians
         
             Cartesian (x, y)
-            Polar (angle, rho)
+            Polar (angle, Rho)
         
         The result is a bunch of short lines, average the slopes of the left and right lanes to get a smooth lane outline.
     

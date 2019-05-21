@@ -49,7 +49,7 @@ def average_slope_intercept(image, lines):
     return np.array([left_line, right_line])
 
 #-------------------------------------------------------------------------
-# Canny algorithm: greyscale, reduce noise, and then canny
+# Canny algorithm: greyscale, reduce noise, and then canny (i.e. show edges only)
 #-------------------------------------------------------------------------
 def canny(image):
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
@@ -94,7 +94,7 @@ def display_lines(image, lines):
 cap = cv2.VideoCapture("test2.mp4") # Create a video capture object
 
 while(cap.isOpened()):
-    _, frame = cap.read()
+    _, frame = cap.read() # get frame capture from video
     
     canny_image = canny(frame)
     cropped_image = region_of_interest(canny_image)    
