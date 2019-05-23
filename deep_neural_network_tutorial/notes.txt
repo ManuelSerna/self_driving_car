@@ -41,12 +41,14 @@ Back propagation
 -------------------------------------------------
 Recall:
     Cross entropy formula:
-    -(sigma)y*ln(p) + (1-y)(ln(1-p))
+    -Sigma(y*ln(p)) + (1-y)(ln(1-p))
+      ^
+      Sum of
     
 Gradient descent is given by taking the derivative of the error function with respect to all the weights of the neural network.
     - Take partial derivatives.
 
-Bacpropagate to update the weights.
+Back propagate to update the weights.
 
 -------------------------------------------------
 Deep Neural Networks, when faced with large amounts of data, use up a lot of computing resources. Convoluted neural networks are a much more effecient solution.

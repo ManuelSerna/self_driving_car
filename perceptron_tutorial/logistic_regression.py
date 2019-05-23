@@ -14,7 +14,7 @@ def draw(x1, x2):
     ln[0].remove() # remove old line with new to make a cool animation
 
 #================================================
-# Compute and return the  result of sigmoid equation
+# Compute and return the result of sigmoid equation
 #================================================
 def sigmoid(score):
     return 1/(1+np.exp(-score))
@@ -31,7 +31,7 @@ def calculate_error(line_parameters, points, y):
 #================================================
 # Calculate new gradient descent
 # Note: alpha is a learning-rate variable
-# At every iteration we minimize the error of some line by subtracting the gradient of the error. This creates a new line with a smaller error, and keep doing that 500 times.
+# At every iteration we minimize the error of some line by subtracting the gradient of the error. This creates a new line with a smaller error, and keep doing that x number of times. Eventually it seems like the line does not move after 1000 iterations.
 #================================================
 def gradient_descent(line_parameters, points, y, alpha):
     m = points.shape[0]
@@ -56,12 +56,14 @@ def gradient_descent(line_parameters, points, y, alpha):
 
 #------------------------------------------------
 # Declarations
+#------------------------------------------------
 n_pts = 100 # set number of points to create
 np.random.seed(0) # seed random number generator
 bias = np.ones(n_pts) # bias is the third node in perceptron, but it's just 1
 
 #------------------------------------------------
 # Create values (x1 and x2 components) for the TOP region using normal distribution (multiplier, st dev, # pts)
+#------------------------------------------------
 top_region = np.array([np.random.normal(10, 2, n_pts), np.random.normal(12, 2, n_pts), bias]).transpose()
 bottom_region = np.array([np.random.normal(5, 2, n_pts), np.random.normal(6, 2, n_pts), bias]).transpose()
 
@@ -75,6 +77,7 @@ y = np.array([(np.zeros(n_pts), np.ones(n_pts))]).reshape(n_pts * 2, 1) # n poin
 
 #------------------------------------------------
 # Label points and show plot
+#------------------------------------------------
 _, ax = plt.subplots(figsize=(4,4))
 ax.scatter(top_region[:, 0], top_region[:, 1], color = 'r') # label red
 ax.scatter(bottom_region[:, 0], bottom_region[:, 1], color = 'b') # label blue
