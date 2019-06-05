@@ -1,7 +1,6 @@
 # Self Driving Car Project
 
-This repository contains all the projects used to develop a simulated self-driving car using various data science and computer vision libraries. I first learned about the fundamentals of machine learning from Udemy; even though machine learning is not "my cup of tea" like I thought, my interest in computer vision started in part from here. Thus I still think this is an important repo.
-
+This repository contains all the projects used to develop a simulated self-driving car using various data science and computer vision libraries. I first learned about the fundamentals of machine learning from Udemy.
 ## Useful Links
 
 Course link: 
@@ -12,6 +11,9 @@ https://www.anaconda.com/distribution/
 
 Pycharm--a great IDE for python:
 https://www.jetbrains.com/pycharm/
+
+Colaboratory--a free Jupyter notebook that runs on the cloud, can handle gnarly calculations:
+https://colab.research.google.com/notebooks/welcome.ipynb
 
 ## Topics of Interest
 * Computer Vision: Finding Lane Lines
@@ -24,3 +26,5 @@ https://www.jetbrains.com/pycharm/
 * Classifying Road Symbols
 * Polynomial Regression
 * Behavioral Cloning
+
+Finally, many thanks to Rayan Slim for introducing me to machine learning, data science libraries for Python, and computer vision!
